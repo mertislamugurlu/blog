@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mert İslam Uğurlu - Blog</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="matrix-style.css" rel="stylesheet">
+
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script src="app.js"></script>
+
+    <style>
+
+        .card {
+
+            background-color: rgba(0, 0, 0, 0.85);
+
+            border: 1px solid #0F0;
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: linear-gradient(
+
+                90deg,
+
+                transparent,
+
+                rgba(0, 255, 0, 0.4),
+
+                transparent
+
+            );
+
+            transition: 0.5s;
+
+        }
+
+
+
+        .card:hover {
+
+            animation: pulse 1.5s infinite;
+
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+
+        }
+
+
+
+        .card:hover::before {
+
+            animation: borderGlow 2s linear infinite;
+
+        }
+
+
+
+        .card-title {
+
+            color: #0F0;
+
+        }
+
+
+
+        .card-text {
+
+            color: #fff;
+
+        }
+
+
+
+        .btn-primary {
+
+            background-color: rgba(0, 255, 0, 0.2);
+
+            border-color: #0F0;
+
+            color: #0F0;
+
+        }
+
+
+
+        .btn-primary:hover {
+
+            background-color: rgba(0, 255, 0, 0.4);
+
+            border-color: #0F0;
+
+            color: #fff;
+
+        }
+
+
+
+        .header-text {
+
+            color: #0F0;
+
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+
+        }
+
+
+
+        /* Dijital Devre Arka Plan Stilleri */
+
+        .circuit-bg {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: #000;
+
+            background-image: 
+
+                linear-gradient(90deg, transparent 95%, rgba(0,255,0,0.1) 95%),
+
+                linear-gradient(transparent 95%, rgba(0,255,0,0.1) 95%);
+
+            background-size: 20px 20px;
+
+            z-index: -2;
+
+        }
+
+
+
+        .circuit-line {
+
+            position: absolute;
+
+            background: rgba(0,255,0,0.2);
+
+            animation: pulse 2s infinite;
+
+        }
+
+
+
+        .circuit-node {
+
+            position: absolute;
+
+            width: 6px;
+
+            height: 6px;
+
+            background: #0F0;
+
+            border-radius: 50%;
+
+            box-shadow: 0 0 10px #0F0;
+
+            animation: nodePulse 2s infinite;
+
+        }
+
+
+
+        @keyframes pulse {
+
+            0% { 
+
+                transform: scale(1);
+
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+
+            }
+
+            50% { 
+
+                transform: scale(1.05);
+
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+
+            }
+
+            100% { 
+
+                transform: scale(1);
+
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+
+            }
+
+        }
+
+
+
+        @keyframes nodePulse {
+
+            0% { transform: scale(1); opacity: 0.5; }
+
+            50% { transform: scale(1.2); opacity: 1; }
+
+            100% { transform: scale(1); opacity: 0.5; }
+
+        }
+
+
+
+        @keyframes borderGlow {
+
+            0% { left: -100%; }
+
+            100% { left: 200%; }
+
+        }
+
+
+
+        /* Mevcut içeriği daha okunabilir yapmak için overlay'i güçlendirelim */
+
+        .content-overlay {
+
+            background-color: rgba(0, 0, 0, 0.85);
+
+            border-radius: 15px;
+
+            padding: 2rem;
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+
+
+        .matrix-rain {
+
+            position: absolute;
+
+            color: #0F0;
+
+            text-shadow: 0 0 5px #0F0;
+
+            user-select: none;
+
+            animation: fall linear forwards;
+
+            opacity: 0;
+
+            animation: fall 2.5s linear;
+
+        }
+
+
+
+        @keyframes fall {
+
+            0% { 
+
+                transform: translateY(-100px);
+
+                opacity: 1;
+
+            }
+
+            50% {
+
+                opacity: 0.8;
+
+            }
+
+            80% {
+
+                opacity: 0.5;
+
+            }
+
+            100% { 
+
+                transform: translateY(100vh);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+
+        .particle {
+
+            position: absolute;
+
+            background: #0F0;
+
+            width: 1px;
+
+            height: 1px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            opacity: 0;
+
+            animation: particleFade 1.5s ease-out;
+
+        }
+
+
+
+        @keyframes particleFade {
+
+            0% {
+
+                opacity: 0.8;
+
+                transform: translate(0, 0) rotate(0deg);
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                transform: translate(var(--tx), var(--ty)) rotate(360deg);
+
+            }
+
+        }
+
+
+
+        .electric {
+
+            position: absolute;
+
+            height: 6px;
+
+            background: linear-gradient(to right, 
+
+                rgba(0, 255, 0, 0),
+
+                rgba(0, 255, 0, 0.8),
+
+                #0F0,
+
+                rgba(0, 255, 0, 0.8),
+
+                rgba(0, 255, 0, 0)
+
+            );
+
+            filter: blur(1px);
+
+            opacity: 1;
+
+            z-index: 100;
+
+            box-shadow: 
+
+                0 0 20px rgba(0, 255, 0, 0.9),
+
+                0 0 40px rgba(0, 255, 0, 0.7),
+
+                0 0 60px rgba(0, 255, 0, 0.5);
+
+            animation: spark 0.15s ease-out;
+
+            transform-origin: center;
+
+        }
+
+
+
+        @keyframes spark {
+
+            0% {
+
+                opacity: 0.3;
+
+                transform: scaleX(0);
+
+                filter: brightness(0.5);
+
+            }
+
+            20% {
+
+                opacity: 1;
+
+                transform: scaleX(1);
+
+                filter: brightness(1.5);
+
+            }
+
+            40% {
+
+                filter: brightness(1);
+
+            }
+
+            60% {
+
+                filter: brightness(1.2);
+
+            }
+
+            80% {
+
+                filter: brightness(1);
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                transform: scaleX(1);
+
+                filter: brightness(0.5);
+
+            }
+
+        }
+
+
+
+        .lightning-container {
+
+            position: absolute;
+
+            width: 100%;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .matrix-rain {
+            position: absolute;
+            color: #0F0;
+            text-shadow: 0 0 5px #0F0;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            opacity: 0;
+        }
+
+        /* Neon Bildirim Stilleri */
+        .music-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 20px;
+            border: 1px solid #0F0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .music-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .neon-text {
+            color: #0F0;
+            font-size: 1.2em;
+            text-shadow: 
+                0 0 5px #0F0,
+                0 0 10px #0F0,
+                0 0 20px #0F0;
+            animation: neonPulse 1.5s ease-in-out infinite;
+        }
+
+        .particle-text {
+            position: relative;
+            animation: particleDance 2s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 3px;
+            opacity: 0.8;
+        }
+
+        .particle-text:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .particle-text:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes neonPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        @keyframes particleDance {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="matrix-bg" class="matrix-bg"></div>
+
+    <div id="particles-js"></div>
+
+
+
+
+
+    <audio id="bgMusic" loop preload="auto" style="display: none;">
+
+        <source src="sound.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+
+    <div class="container mt-5">
+        <header class="text-center mb-5">
+            <h1 class="header-text">Mert İslam Uğurlu</h1>
+            <p class="lead text-light">ERP Developer and Consultant & Endüstri Mühendisi</p>
+        </header>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">ERP Consultant Deneyimleri</h5>
+                        <p class="card-text">ERP danışmanlığı alanında edindiğim tecrübeler, best practice'ler ve sektör içgörüleri.</p>
+                        <a href="index.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Endüstri Mühendisliği</h5>
+                        <p class="card-text">Fakültede öğrendiğim teorik bilgiler, uygulamalar ve akademik perspektif.</p>
+                        <a href="endustri-muhendisligi.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Programlama Algoritma ve Süreç</h5>
+                        <p class="card-text">Yazılım geliştirme, algoritma tasarımı ve süreç optimizasyonu deneyimleri.</p>
+                        <a href="index.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Atölye Stajı</h5>
+                        <p class="card-text">Atölye stajında edindiğim pratik deneyimler ve teknik öğrenimler.</p>
+                        <a href="index.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Uzun Dönem Stajyer</h5>
+                        <p class="card-text">Uzun dönem stajyer olarak çalıştığım projelerde edindiğim deneyimler.</p>
+                        <a href="index.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Yönetim Stajı</h5>
+                        <p class="card-text">Yönetim stajında edindiğim organizasyonel ve yönetimsel deneyimler.</p>
+                        <a href="index.html" class="btn btn-primary">Daha Fazla</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="musicNotification" class="music-notification">
+        <span class="neon-text">Müzik Başlatıldı.Tıklamaya Devam Et.
+            <span class="particle-text">✧</span>
+            <span class="particle-text">✦</span>
+            <span class="particle-text">⋆</span>
+        </span>
+    </div>
+
+    <script>
+
+
+        const audio = document.getElementById('bgMusic');
+        audio.volume = 0.5; 
+        
+ 
+        window.addEventListener('load', function() {
+            const musicNotification = document.getElementById('musicNotification');
+            
+
+            const startAudio = () => {
+                audio.play().catch(err => console.log('Müzik başlatılamadı:', err));
+                
+                // Bildirimi göster
+                musicNotification.classList.add('show');
+                setTimeout(() => {
+                    musicNotification.classList.remove('show');
+                }, 3000);
+                
+                document.removeEventListener('click', startAudio);
+                document.removeEventListener('touchstart', startAudio);
+            };
+            
+            document.addEventListener('click', startAudio);
+            document.addEventListener('touchstart', startAudio); // Mobil cihazlar için
+        });
+
+        /* Matrix yağmur efekti */
+        function createMatrixRain() {
+            const bg = document.getElementById('matrix-bg');
+            const characters = "01アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン";
+            const maxDrops = 50;
+            let activeDrops = 0;
+
+            function createDrop() {
+                if (activeDrops >= maxDrops) return;
+                activeDrops++;
+
+                const drop = document.createElement('span');
+                drop.className = 'matrix-rain';
+                const x = Math.random() * window.innerWidth;
+                drop.style.left = x + 'px';
+
+                const duration = Math.random() * 2 + 2;
+                drop.style.animationDuration = duration + 's';
+
+                drop.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+                drop.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                drop.style.opacity = 0.7 + Math.random() * 0.3;
+
+                bg.appendChild(drop);
+                
+                setTimeout(() => {
+                    bg.removeChild(drop);
+                    activeDrops--;
+                }, duration * 1000);
+            }
+
+            let lastTime = 0;
+            function animate(currentTime) {
+                if (currentTime - lastTime > 100) {
+                    createDrop();
+                    lastTime = currentTime;
+                }
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            createMatrixRain();
+
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#0f0'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000'
+                        }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#0f0',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'bounce',
+                        bounce: true,
+                        attract: {
+                            enable: true,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+
+    </script>
+
+
+
+    <style>
+
+        #matrix-bg {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: transparent;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+        }
+
+
+
+        #particles-js {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.9);
+
+            z-index: 1;
+
+        }
+
+
+
+        .container {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+
+        .matrix-rain {
+
+            position: absolute;
+
+            color: #0F0;
+
+            text-shadow: 0 0 5px #0F0;
+
+            user-select: none;
+
+            pointer-events: none;
+
+            animation: fall linear forwards;
+
+            opacity: 0;
+
+        }
+
+
+
+        @keyframes fall {
+
+            0% { 
+
+                transform: translateY(-100px);
+
+                opacity: 1;
+
+            }
+
+            50% {
+
+                opacity: 0.8;
+
+            }
+
+            80% {
+
+                opacity: 0.5;
+
+            }
+
+            100% { 
+
+                transform: translateY(100vh);
+
+                opacity: 0;
+
+            }
+
+        }
+
+    </style>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

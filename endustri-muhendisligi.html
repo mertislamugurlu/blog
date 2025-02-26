@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endüstri Mühendisliği - Mert İslam Uğurlu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="matrix-style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="matrix-bg" class="matrix-bg"></div>
+    <a href="index.html" class="btn back-button">← Ana Sayfaya Dön</a>
+
+    <div class="container py-5">
+        <div class="content-overlay">
+            <h1 class="text-center mb-4">Sakarya Üniversitesi Endüstri Mühendisliği Fakültesi [M5]</h1>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3>Başarı Sıralamaları</h3>
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>Yıl</th>
+                                <th>Taban Puan</th>
+                                <th>Başarı Sıralaması</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2020</td>
+                                <td>XXX.XX</td>
+                                <td>XXXXX</td>
+                            </tr>
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p>Daha detaylı bilgi için iletişime geçin:</p>
+                <a href="mailto:mertislamugurlu@gmail.com" class="btn btn-outline-light">
+                    mertislamugurlu@gmail.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createMatrixRain() {
+            const bg = document.getElementById('matrix-bg');
+            const characters = "01";
+            
+            function createDrop() {
+                const drop = document.createElement('span');
+                drop.className = 'matrix-rain';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                drop.style.opacity = Math.random();
+                drop.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+                
+                drop.style.animation = `
+                    fall ${Math.random() * 2 + 1}s linear forwards,
+                    color-shift 2s infinite
+                `;
+                
+                bg.appendChild(drop);
+                
+                setTimeout(() => {
+                    bg.removeChild(drop);
+                }, 3000);
+            }
+            
+            setInterval(createDrop, 50);
+        }
+
+        createMatrixRain();
+    </script>
+
+    <style>
+        @keyframes fall {
+            from { transform: translateY(-100px); }
+            to { transform: translateY(100vh); }
+        }
+
+        @keyframes color-shift {
+            0% { color: #0F0; }
+            50% { color: #00FF00; }
+            100% { color: #0F0; }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
